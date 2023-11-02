@@ -24,8 +24,8 @@ func ConnectDB(ctx context.Context) (*mongo.Collection, *mongo.Collection) {
 }
 
 func Sftp_connection() *sftp.Client {
-	username := "netsys"
-	password := "Netsys@4321!"
+	username := ""
+	password := ""
 	clientConfig := &ssh.ClientConfig{
 		User:            username,
 		Auth:            []ssh.AuthMethod{ssh.Password(password)},
