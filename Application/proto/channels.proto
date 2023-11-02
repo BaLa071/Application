@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+option go_package = "github.com";
+
+package channels;
+
+service ChannelService{
+    rpc AddChannel(AddChannelReq) returns (ViewChannelRes);
+    rpc ViewChannel(ChanReq) returns (ViewChannelRes);
+    rpc ListChannel(EmptyReq) returns (ListChannelRes);
+}
+
+
+message AddChannelReq {
+    enum ChanType{
+        SFTP = 0;
+        S3 = 1;      
+    }
+
+    string Name = 1;
+    ChanType ChannelType  = 2;
+    string ServerIP = 3;
+    string AuthenticationType = 4;
+    string Username = 5;
+    string Password = 6;
+    string PrivateKey = 7;
+    repeated Fold Folders = 8;
+}
+
+message Fold{
+    string Path =1;
+    string GPGKeyID = 2;
+}
+
+message ViewChannelRes{
+    string ID = 1;
+    string Name = 2;
+    string ChannelType = 3;
+    string ServerIP = 4;
+    string AuthenticationType = 5;
+    string Username = 6;
+    string Password = 7;
+    string PrivateKey = 8;
+    repeated FoldResp FoldersResp = 9;
+}
+
+message FoldResp{
+    string FoldID = 1;
+    string Path =2;
+    string GPGKeyID = 3;
+}
+message EmptyReq {
+}
+
+message ChanReq{
+    string ChannelID = 1;
+}
+
+message ListChannelRes{
+    repeated ViewChannelRes ListResp = 1;
+}

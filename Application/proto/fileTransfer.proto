@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package FileTransfer;
+
+option go_package="github.com";
+
+service FileTransferService {
+    rpc Get(GetRequest)returns(stream GetResponse);
+    rpc Put(stream PutRequest)returns(PutResponse);
+}
+message GetRequest {
+    string AppId=1;
+    string FoldId=2;
+}
+
+message GetResponse {
+    bytes Chunk=1;
+    string Messag=2;
+}
+
+message PutRequest {
+    string AppId=1;
+    string FoldId=2;
+    bytes Chunk=3;
+}
+
+message PutResponse {
+    string Messag=1;
+}

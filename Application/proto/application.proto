@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package Application;
+
+option go_package="github.com";
+
+service ApplicationService{
+    rpc Create(CreateRequest)returns(CreateResponse);
+    rpc List(ListRequest)returns(ListResponse);
+    rpc ListAll(empty)returns(ListAllResponse);
+}
+
+message CreateRequest {
+    string Name=1;
+    string ChannelId=2;
+    string CreatedBy=3;
+}
+
+message CreateResponse {
+    string ChannelId=1;
+}
+
+message ListRequest {
+    string Id=1;
+}
+
+message ListResponse {
+    string Id=1;
+    string Name=2;
+    string ChannelId=3;
+    string CreatedBy=4;
+    string CreatedAt=5;
+    string UpdatedAt=6;
+}
+
+message empty {
+}
+
+message ListAllResponse {
+    repeated ListResponse ListAll=1;
+}
